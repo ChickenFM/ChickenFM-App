@@ -1,0 +1,155 @@
+html,
+body,
+#app {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+html,
+body {
+    overflow: hidden;
+    border-radius: 30px;
+    background: none !important;
+}
+
+body {
+    border-radius: 25px;
+}
+
+#app {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: relative;
+    -webkit-app-region: drag;
+}
+
+.image {
+    display: block;
+    /*width: 9rem;
+    height: 100%;*/
+    width: 26vw;
+    height: 26vw;
+    background-size: cover;
+}
+
+.content {
+    padding-top: 2rem;
+    padding-left: 1rem;
+    width: 60%;
+    user-select: none;
+}
+
+.buttons {
+    padding: 1rem;
+}
+
+.button {
+    width: 40px;
+    height: 40px;
+    background-color: #2b2b2b;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    -webkit-app-region: none;
+}
+
+.closebutton span {
+    transition: all .2s ease-in;
+}
+
+.closebutton span:hover {
+    color: red;
+}
+
+.closebutton span {
+    font-size: 40px;
+}
+
+.volumebutton:hover span {
+    border-radius: 0 10px 10px 0;
+}
+
+.volumebutton:hover .volumeslider {
+    display: block;
+}
+
+.volumebutton span {
+    font-size: 40px;
+}
+
+.volumeslider {
+    display: none;
+    background: #2b2b2b;
+    border-radius: 9.6px 0px 0px 9.6px;
+    width: 125px;
+    height: 40px;
+    position: absolute;
+    margin-left: -120px;
+    margin-top: -32px;
+    z-index: 1;
+    -webkit-app-region: none;
+    top: 80%;
+    line-height: 39px;
+}
+
+.volumerange {
+    -webkit-appearance: none;
+    outline: none;
+    width: 100px;
+    height: 10px;
+    margin-left: 10px;
+    margin-top: auto;
+    /*background: linear-gradient(270deg, #F16C6C 0%, #C3D148 27.08%, #35DC96 59.33%);*/
+    background: rgb(59, 239, 255);
+    background: linear-gradient(90deg, rgba(59, 239, 255, 1) 0%, rgba(0, 16, 255, 1) 100%);
+    border-radius: 24px;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.volumerange::-webkit-slider-runnable-track {
+    height: 4px;
+    -webkit-appearance: none;
+}
+
+.volumerange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: -webkit-grab;
+    cursor: grab;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 10px;
+    -webkit-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.35);
+}
+
+.title {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.artist {
+    font-size: 17.5px;
+    color: gray;
+    margin: 0;
+}
+
+.player {
+    text-align: center;
+    line-height: 130px;
+    -webkit-app-region: none;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+    color: white;
+    cursor: pointer;
+}

@@ -1,0 +1,6 @@
+node_modules/
+package-lock.json
+out/
+dist/
+electron-builder.yml
+.DS_Store

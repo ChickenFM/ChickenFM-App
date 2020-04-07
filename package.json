@@ -1,0 +1,48 @@
+{
+    "name": "ChickenFM",
+    "version": "0.1.0",
+    "description": "The Official ChickenFM Desktop App",
+    "main": "./src/main.js",
+    "scripts": {
+        "start": "electron ./src/main.js",
+        "build": "electron-builder ./src/ --mac --win --x64 --publish never",
+        "deploy": "electron-builder build --mac --win --publish always",
+        "build:mac": "electron-builder ./src/ --mac --publish never",
+        "build:win": "electron-builder ./src/ --win --x64 --publish never"
+    },
+    "keywords": [
+        "radio",
+        "chickenfm",
+        "music"
+    ],
+    "author": "TheChicken14",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ChickenFM/ChickenFM-App"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^8.2.0",
+        "electron-builder": "^22.4.1"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "bootstrap": "^4.4.1",
+        "electron-updater": "^4.2.5",
+        "material-design-icons": "^3.0.1",
+        "vue": "^2.6.11"
+    },
+    "build": {
+        "appId": "ChickenFM",
+        "mac": {
+            "target": "dmg"
+        },
+        "dmg": {
+            "icon": "build/icon.icns"
+        },
+        "win": {
+            "target": "NSIS",
+            "icon": "build/icon.ico"
+        }
+    }
+}

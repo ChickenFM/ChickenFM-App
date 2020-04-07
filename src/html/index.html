@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="notification.css" />
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="../../node_modules/material-design-icons/iconfont/material-icons.css" />
+    <title>ChickenFM</title>
+</head>
+
+<!--play_arrow-->
+<!--pause-->
+
+<body>
+    <div id="notification" class="hidden">
+        <p id="message"></p>
+        <button id="close-button" onClick="closeNotification()">
+          Close
+        </button>
+        <button id="restart-button" onClick="restartApp()" class="hidden">
+          Restart
+        </button>
+    </div>
+    <div id="app">
+        <audio class="audio" ref="audio"></audio>
+        <div class="image" :style="{backgroundImage:'url('+art+')'}">
+            <div class="player">
+                <span v-if="playing" @click="toggle" class="material-icons md-48 align-middle">pause</span>
+                <span v-else @click="toggle" class="material-icons md-48 align-middle">play_arrow</span>
+            </div>
+        </div>
+        <div class="content">
+            <p class="title">{{title}}</p>
+            <p class="artist">{{artist}}</p>
+        </div>
+        <div class="buttons">
+            <div class="closebutton button" @click="close">
+                <span class="material-icons">close</span>
+            </div>
+            <div class="volumebutton">
+                <div class="button">
+                    <span class="material-icons button">volume_up</span>
+                </div>
+                <div class="volumeslider">
+                    <input type="range" min="0" max="100" value="100" class="volumerange" @input="changeVolume($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script>
+    require("./index.js")
+</script>
+
+</html>
