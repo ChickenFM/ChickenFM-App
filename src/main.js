@@ -17,9 +17,7 @@ function createWindow() {
         //mainWindow.openDevTools()
         //mainWindow.loadFile('html/index.html')
     mainWindow.loadURL(path.join("file://", __dirname, 'html', 'index.html'), )
-    mainWindow.once('ready-to-show', () => {
-        autoUpdater.checkForUpdatesAndNotify();
-    });
+    autoUpdater.checkForUpdatesAndNotify();
 }
 
 
