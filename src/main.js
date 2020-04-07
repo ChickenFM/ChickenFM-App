@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, Notification } = require('electron')
 const path = require('path')
 const { autoUpdater } = require('electron-updater');
 
@@ -34,12 +34,21 @@ app.on('activate', function() {
 })
 
 autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
+    if (Notification.isSupported()) {
+        new Notification('Update available!', {
+            body: 'The new update is now downloading...'
+        }).show()
+    }
 });
 autoUpdater.on('update-downloaded', () => {
-    mainWindow.webContents.send('update_downloaded');
-});
-
-ipcMain.on('restart_app', () => {
-    autoUpdater.quitAndInstall();
+    if (Notification.isSupported()) {
+        const updateNotif = new Notification({
+            title: 'Update available!',
+            body: 'Click here to install the new update'
+        })
+        updateNotif.show()
+        updateNotif.on("click", () => {
+            autoUpdater.quitAndInstall();
+        })
+    }
 });

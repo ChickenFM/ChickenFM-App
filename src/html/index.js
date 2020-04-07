@@ -1,6 +1,6 @@
 const Vue = require("vue/dist/vue")
 const axios = require("axios")
-const { ipcRenderer, remote } = require('electron');
+const { remote } = require('electron');
 
 const dataVue = new Vue({
     el: '#app',
