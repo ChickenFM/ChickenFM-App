@@ -1,0 +1,8 @@
+#app {
+    padding: 3rem;
+    text-align: center;
+}
+
+.station {
+    cursor: pointer;
+}
