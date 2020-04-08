@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/spinner.css" />
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap-grid.css" />
     <link rel="stylesheet" href="../../node_modules/material-design-icons/iconfont/material-icons.css" />
@@ -15,11 +16,15 @@
 
 <body>
     <div id="app">
-        <audio class="audio" ref="audio"></audio>
+        <audio class="audio" ref="audio" id="audio"></audio>
         <div class="image" :style="{backgroundImage:'url('+art+')'}">
             <div class="player">
                 <span v-if="playing" @click="toggle" class="material-icons md-48 align-middle">pause</span>
-                <span v-else @click="toggle" class="material-icons md-48 align-middle">play_arrow</span>
+                <span v-else-if="!playing && !loading" @click="toggle" class="material-icons md-48 align-middle">play_arrow</span>
+                <div v-if="loading">
+                    <!--https://codepen.io/gaffareljeremie/pen/owjhF-->
+                    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -27,8 +32,12 @@
             <p class="artist">{{artist}}</p>
         </div>
         <div class="buttons">
-            <div class="closebutton button" @click="close">
-                <span class="material-icons">close</span>
+            <div class="closebutton button">
+                <span class="material-icons closespan" @click="close">close</span>
+                <div class="buttonstack">
+                    <span class="material-icons button requestsong" @click="requestsong">playlist_add</span>
+                    <span class="material-icons button stationchanger" @click="stationchanger">radio</span>
+                </div>
             </div>
             <div class="volumebutton">
                 <div class="button">
@@ -43,7 +52,7 @@
     </div>
 </body>
 <script>
-    require("./index.js")
+    require("./js/index.js")
 </script>
 
 </html>
