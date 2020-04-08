@@ -53,14 +53,23 @@ body {
     cursor: pointer;
     margin-bottom: 1rem;
     -webkit-app-region: none;
+    user-select: none;
 }
 
-.closebutton span {
+.closebutton .closespan {
     transition: all .2s ease-in;
 }
 
-.closebutton span:hover {
+.closebutton .closespan:hover {
     color: red;
+}
+
+.closebutton:hover .buttonstack {
+    display: block;
+}
+
+.closebutton:hover {
+    border-radius: 0 10px 10px 0;
 }
 
 .closebutton span {
@@ -94,6 +103,42 @@ body {
     line-height: 39px;
 }
 
+.buttonstack {
+    display: none;
+    background: #2b2b2b;
+    border-radius: 9.6px 0px 0px 9.6px;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    margin-left: -100px;
+    margin-top: -32px;
+    z-index: 1;
+    -webkit-app-region: none;
+    top: 37%;
+    vertical-align: middle;
+}
+
+.requestsong {
+    padding-left: 0.5rem;
+    transition: all .2s ease-in;
+}
+
+.stationchanger {
+    padding-left: 0.5rem;
+    padding-right: 3rem;
+    font-size: 10px;
+    height: 0px;
+    transition: all .2s ease-in;
+}
+
+.stationchanger:hover {
+    color: lightgreen;
+}
+
+.requestsong:hover {
+    color: lightgreen;
+}
+
 .volumerange {
     -webkit-appearance: none;
     outline: none;
@@ -125,7 +170,6 @@ body {
     background: #FFFFFF;
     border-radius: 10px;
     padding-top: 10px;
-    -webkit-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.35);
 }
 
@@ -146,6 +190,7 @@ body {
     text-align: center;
     line-height: 130px;
     -webkit-app-region: none;
+    user-select: none;
 }
 
 .material-icons.md-48 {
