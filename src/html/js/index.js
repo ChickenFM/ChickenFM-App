@@ -2,9 +2,17 @@ const Vue = require("vue/dist/vue")
 const axios = require("axios")
 const { remote, ipcRenderer } = require('electron');
 
+//Settings
+
 if (!localStorage.getItem("station") || localStorage.getItem("station") == null) {
     localStorage.setItem("station", "1")
     localStorage.setItem("url", "https://radio.chickenfm.com/radio/8000/radio.mp3")
+}
+if (localStorage.getItem("discordpresence") == null) {
+    localStorage.setItem("discordpresence", true)
+}
+if (localStorage.getItem("autoplay") == null) {
+    localStorage.setItem("autoplay", false)
 }
 
 
@@ -41,7 +49,8 @@ const dataVue = new Vue({
         title: "",
         artist: "",
         playing: false,
-        loading: true
+        loading: false,
+        starting: true
     },
     methods: {
         toggle() {
@@ -65,13 +74,14 @@ const dataVue = new Vue({
         },
         stationchanger() {
             ipcRenderer.send('stationChanger')
-        }
+        },
     }
 })
 var offline = false
 const getData = () => {
     axios.get(`https://api.chickenfm.com/nowplaying/${localStorage.getItem("station")}`)
         .then(({ data }) => {
+            dataVue.starting = false
             offline = false
             if (dataVue.art !== data.cover_medium) {
                 dataVue.art = data.cover_medium;
@@ -80,6 +90,7 @@ const getData = () => {
                 setMetaData(data)
             }
         }).catch(e => {
+            dataVue.starting = false
             if (e.response.status == 400) {
                 localStorage.setItem('station', 1)
                 localStorage.setItem('url', "https://radio.chickenfm.com/radio/8000/radio.mp3")
@@ -101,10 +112,10 @@ const getData = () => {
                         dataVue.art = "./img/default.png";
                     })
             }
-        }).then(() => dataVue.loading = false)
+        })
 }
 getData()
-setInterval(getData, 5000)
+setInterval(getData, 15000)
 
 ipcRenderer.on("updateStation", () => {
     getData()
@@ -117,28 +128,24 @@ ipcRenderer.on("updateStation", () => {
 
 // Show metadata of songs on windows and use media keys
 const setMetaData = (data) => {
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: data.title,
-                artist: data.artist,
-                artwork: [
-                    { src: data.cover_medium, sizes: '250x250', type: 'image/jpg' },
-                    { src: data.cover_xl, sizes: '1000x1000', type: 'image/jpg' },
-                ]
-            });
-            navigator.mediaSession.setActionHandler('play', function() {
-                playRadio();
-            });
-            navigator.mediaSession.setActionHandler('pause', function() {
-                pauseRadio()
-            });
-            navigator.mediaSession.setActionHandler('stop', function() {
-                stopRadio()
-            });
-        }
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: data.title,
+            artist: data.artist,
+            artwork: [
+                { src: data.cover_medium, sizes: '250x250', type: 'image/jpg' },
+                { src: data.cover_xl, sizes: '1000x1000', type: 'image/jpg' },
+            ]
+        });
+        navigator.mediaSession.setActionHandler('play', function() {
+            playRadio();
+        });
+        navigator.mediaSession.setActionHandler('pause', function() {
+            pauseRadio()
+        });
+        navigator.mediaSession.setActionHandler('stop', function() {
+            stopRadio()
+        });
     }
-    /*ipcRenderer.send('app_version');
-    ipcRenderer.on('app_version', (event, arg) => {
-      ipcRenderer.removeAllListeners('app_version');
-      version.innerText = 'Version ' + arg.version;
-    });*/
+    ipcRenderer.send('updatePresence', data)
+}

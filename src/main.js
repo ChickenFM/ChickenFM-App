@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Notification, ipcMain, dialog } = require('electron')
 const path = require('path')
 const { autoUpdater } = require('electron-updater');
-
+var client = require('discord-rich-presence')('614154889206956043');
 let mainWindow;
 
 function createWindow() {
@@ -78,6 +78,44 @@ ipcMain.on("stationChanger", () => {
     })
     stationChangeWindow.loadURL(path.join("file://", __dirname, 'html', 'stations.html'), )
 })
+ipcMain.on("settingsPopup", () => {
+    stationChangeWindow = new BrowserWindow({
+        parent: mainWindow,
+        width: 400,
+        height: 400,
+        title: "Settings",
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+    stationChangeWindow.loadURL(path.join("file://", __dirname, 'html', 'settings.html'), )
+})
 ipcMain.on("changeStation", () => {
     mainWindow.webContents.send("updateStation")
+})
+
+
+
+ipcMain.on("updatePresence", (event, data) => {
+    try {
+        client.updatePresence({
+            state: data.text,
+            details: data.station,
+            startTimestamp: data.played_at * 1000,
+            endTimestamp: (data.played_at * 1000) + (data.duration * 1000),
+            largeImageKey: 'default',
+            //smallImageKey: 'default',
+            instance: false,
+            largeImageText: `ChickenFM App`
+        });
+    } catch (e) {
+        void(e);
+    }
+})
+ipcMain.on("stopPresence", () => {
+    try {
+        client.disconnect()
+    } catch (e) {
+        void(e)
+    }
 })

@@ -1,6 +1,6 @@
 {
     "name": "ChickenFM",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "description": "The Official ChickenFM Desktop App",
     "main": "./src/main.js",
     "scripts": {
@@ -28,8 +28,10 @@
     "dependencies": {
         "axios": "^0.19.2",
         "bootstrap": "^4.4.1",
+        "discord-rich-presence": "0.0.8",
         "electron-updater": "^4.2.5",
         "material-design-icons": "^3.0.1",
+        "materialize-css": "^1.0.0-rc.2",
         "vue": "^2.6.11"
     },
     "build": {

@@ -56,6 +56,19 @@ body {
     user-select: none;
 }
 
+.stackbutton {
+    width: 40px;
+    background-color: #2b2b2b;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    -webkit-app-region: none;
+    user-select: none;
+    align-self: auto;
+    margin: auto auto;
+}
+
 .closebutton .closespan {
     transition: all .2s ease-in;
 }
@@ -65,7 +78,7 @@ body {
 }
 
 .closebutton:hover .buttonstack {
-    display: block;
+    display: flex;
 }
 
 .closebutton:hover {
@@ -107,15 +120,16 @@ body {
     display: none;
     background: #2b2b2b;
     border-radius: 9.6px 0px 0px 9.6px;
-    width: 100px;
+    width: 130px;
     height: 40px;
     position: absolute;
-    margin-left: -100px;
+    margin-left: -130px;
     margin-top: -32px;
     z-index: 1;
     -webkit-app-region: none;
     top: 37%;
     vertical-align: middle;
+    flex-direction: row;
 }
 
 .requestsong {
@@ -126,8 +140,6 @@ body {
 .stationchanger {
     padding-left: 0.5rem;
     padding-right: 3rem;
-    font-size: 10px;
-    height: 0px;
     transition: all .2s ease-in;
 }
 
@@ -136,6 +148,16 @@ body {
 }
 
 .requestsong:hover {
+    color: lightgreen;
+}
+
+.settings {
+    padding-left: 0.5rem;
+    transition: all .2s ease-in;
+    font-size: 10px;
+}
+
+.settings:hover {
     color: lightgreen;
 }
 
@@ -197,4 +219,12 @@ body {
     font-size: 48px;
     color: white;
     cursor: pointer;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
 }
